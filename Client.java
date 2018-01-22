@@ -30,7 +30,7 @@ public class Client extends ConnectedThingClient{
 		
 		LOG.info("START");
 		config.setUri("ws://127.0.0.1:8080/Thingworx/WS");
-		config.setAppKey("1288056b-c45b-4d9e-9641-f51d5b973419");
+		config.setAppKey("423bea10-0316-4efb-8bb4-8c80a17f1453");
 		config.ignoreSSLErrors(true);
 		try {
 			Client client = new Client(config);
@@ -42,13 +42,16 @@ public class Client extends ConnectedThingClient{
 				Thread.sleep(1000);
 				LOG.info("WAIT");
 			}
-			ValueCollection params = new ValueCollection();
-			
-			//client.invokeService(ThingworxEntityTypes.Things, "Servis2", "test", params, 5000);
-			
-			TestRemTesmpalte thing1 = new TestRemTesmpalte("TestR2", "test conbection r1", client);
-			
-			client.bindThing(thing1);
+                        String[] room = new String[]{"a","b"};
+                        for(String r: room){
+                            ValueCollection p= new ValueCollection();
+                            p.SetStringValue("RoomName", r);
+                            client.invokeService(ThingworxEntityTypes.Things, "RoomCreator", "RoomCreator", p, 5000);
+                        }
+                         for(String r: room){
+                             RoomSO th = new RoomSO(r, "", client);
+                             client.bindThing(th);
+                         }
 			
 			while(!client.isShutdown()) {
 				// Loop over all the Virtual Things and process them
@@ -56,6 +59,7 @@ public class Client extends ConnectedThingClient{
 					LOG.info("SEND");
 					for(VirtualThing thing : client.getThings().values()) {
 						try {
+                                                    System.out.println(thing.getName()+"   dsadsadsadasdasdsadsadas");
 							thing.processScanRequest();
 						}
 						catch(Exception eProcessing) {
@@ -63,7 +67,7 @@ public class Client extends ConnectedThingClient{
 						}
 					}
 					LOG.info("SLEEP");
-					Thread.sleep(5000);
+					Thread.sleep(10000);
 				}
 			}
 			LOG.info("END");
