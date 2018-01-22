@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities>
+    <Things>
+        <Thing description="" documentationContent="" effectiveThingPackage="ConfiguredThing" enabled="true" homeMashup="" identifier="" lastModifiedDate="2018-01-22T20:51:59.359+01:00" name="RoomCreator" projectName="" published="false" tags="Applications:SmartOffice" thingTemplate="GenericThing" valueStream="">
+            <Owner name="Administrator" type="User"/>
+            <avatar/>
+            <DesignTimePermissions>
+                <Create/>
+                <Read/>
+                <Update/>
+                <Delete/>
+                <Metadata/>
+            </DesignTimePermissions>
+            <RunTimePermissions/>
+            <VisibilityPermissions>
+                <Visibility/>
+            </VisibilityPermissions>
+            <ConfigurationTables/>
+            <ThingShape>
+                <PropertyDefinitions/>
+                <ServiceDefinitions>
+                    <ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="RoomCreator">
+                        <ResultType baseType="NOTHING" description="" name="result" ordinal="0"/>
+                        <ParameterDefinitions>
+                            <FieldDefinition baseType="STRING" description="" name="RoomName" ordinal="1"/>
+                        </ParameterDefinitions>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions/>
+                <ServiceMappings/>
+                <ServiceImplementations>
+                    <ServiceImplementation description="" handlerName="Script" name="RoomCreator">
+                        <ConfigurationTables>
+                            <ConfigurationTable description="Script" isMultiRow="false" name="Script" ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code><![CDATA[if(Things[RoomName] ==undefined){
+    
+var params = {
+	name: RoomName /* STRING */,
+	description: undefined /* STRING */,
+	thingTemplateName: "SmartOfficeTemplate" /* THINGTEMPLATENAME */,
+	tags: undefined /* TAGS */
+};
+
+// no return
+Resources["EntityServices"].CreateThing(params);
+    Things[RoomName].EnableThing();
+    Things[RoomName].RestartThing();
+}
+    
+
+]]></code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions/>
+            </ThingShape>
+            <PropertyBindings/>
+            <RemotePropertyBindings/>
+            <RemoteServiceBindings/>
+            <RemoteEventBindings/>
+            <AlertConfigurations/>
+            <ImplementedShapes/>
+            <ThingProperties/>
+            <ConfigurationChanges>
+                <ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, thingTemplate : updated&#10;" timestamp="2017-12-12T08:42:57.955+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="services :  : Code Updated, Input parameter RoomName Added, RoomCreator : Inputs updated, Service Added&#10;" timestamp="2017-12-12T08:45:18.371+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="services : RoomCreator : Code Updated&#10;" timestamp="2017-12-12T08:45:53.504+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2017-12-12T08:45:58.319+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="services : RoomCreator : Input parameter Te Added, Inputs updated, Input parameter Te Updated&#10;" timestamp="2018-01-08T18:59:16.628+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="header : tags : updated&#10;" timestamp="2018-01-22T20:51:59.358+01:00" user="Administrator"/>
+            </ConfigurationChanges>
+        </Thing>
+    </Things>
+</Entities>

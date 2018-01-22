@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities>
+    <ThingTemplates>
+        <ThingTemplate baseThingTemplate="RemoteThing" description="" documentationContent="" effectiveThingPackage="RemoteThing" homeMashup="" lastModifiedDate="2018-01-22T19:52:39.461+01:00" name="SmartOfficeTemplate" projectName="" tags="Applications:SmartOffice" thingPackage="" valueStream="StreamSO">
+            <Owner name="Administrator" type="User"/>
+            <avatar/>
+            <DesignTimePermissions>
+                <Create/>
+                <Read/>
+                <Update/>
+                <Delete/>
+                <Metadata/>
+            </DesignTimePermissions>
+            <RunTimePermissions/>
+            <VisibilityPermissions>
+                <Visibility/>
+            </VisibilityPermissions>
+            <ConfigurationTables/>
+            <PropertyBindings/>
+            <RemotePropertyBindings>
+                <RemotePropertyBinding foldType="NONE" name="Humidity" pushThreshold="0.0" pushType="ALWAYS" sourceName="" timeout="0"/>
+                <RemotePropertyBinding foldType="NONE" name="IsHeatingOn" pushThreshold="0.0" pushType="VALUE" sourceName="" timeout="0"/>
+                <RemotePropertyBinding foldType="NONE" name="IsLightOn" pushThreshold="0.0" pushType="VALUE" sourceName="" timeout="0"/>
+                <RemotePropertyBinding foldType="NONE" name="Temperature" pushThreshold="0.0" pushType="ALWAYS" sourceName="" timeout="0"/>
+            </RemotePropertyBindings>
+            <RemoteServiceBindings/>
+            <RemoteEventBindings/>
+            <AlertConfigurations>
+                <AlertDefinitions name="Humidity"/>
+                <AlertDefinitions name="IsHeatingOn"/>
+                <AlertDefinitions name="IsLightOn"/>
+                <AlertDefinitions name="Temperature"/>
+            </AlertConfigurations>
+            <ThingShape>
+                <PropertyDefinitions>
+                    <PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="false" aspect.isReadOnly="false" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Humidity" ordinal="4"/>
+                    <PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="false" aspect.isReadOnly="false" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="IsHeatingOn" ordinal="3"/>
+                    <PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="false" aspect.isReadOnly="false" baseType="BOOLEAN" category="" description="" isLocalOnly="false" name="IsLightOn" ordinal="2"/>
+                    <PropertyDefinition aspect.cacheTime="0.0" aspect.dataChangeType="ALWAYS" aspect.isLogged="true" aspect.isPersistent="false" aspect.isReadOnly="false" baseType="NUMBER" category="" description="" isLocalOnly="false" name="Temperature" ordinal="1"/>
+                </PropertyDefinitions>
+                <ServiceDefinitions>
+                    <ServiceDefinition aspect.isAsync="false" category="" description="" isAllowOverride="false" isLocalOnly="false" isOpen="false" isPrivate="false" name="tatata">
+                        <ResultType baseType="NOTHING" description="" name="result" ordinal="0"/>
+                        <ParameterDefinitions/>
+                    </ServiceDefinition>
+                </ServiceDefinitions>
+                <EventDefinitions/>
+                <ServiceMappings/>
+                <ServiceImplementations>
+                    <ServiceImplementation description="" handlerName="Script" name="tatata">
+                        <ConfigurationTables>
+                            <ConfigurationTable description="Script" isMultiRow="false" name="Script" ordinal="0">
+                                <DataShape>
+                                    <FieldDefinitions>
+                                        <FieldDefinition baseType="STRING" description="code" name="code" ordinal="0"/>
+                                    </FieldDefinitions>
+                                </DataShape>
+                                <Rows>
+                                    <Row>
+                                        <code><![CDATA[var params = {
+	infoTableName : "InfoTable",
+	dataShapeName : "OfficeStream"
+};
+
+// CreateInfoTableFromDataShape(infoTableName:STRING("InfoTable"), dataShapeName:STRING):INFOTABLE(OfficeStream)
+var result = Resources["InfoTableFunctions"].CreateInfoTableFromDataShape(params);
+result.Temperature = me.Temperature;
+result.Humidity = me.Humidity;
+result.IsLightOn = me.IsLightOn;
+result.IsHeatOn = me.IsHeatOn;
+
+]]></code>
+                                    </Row>
+                                </Rows>
+                            </ConfigurationTable>
+                        </ConfigurationTables>
+                    </ServiceImplementation>
+                </ServiceImplementations>
+                <Subscriptions/>
+            </ThingShape>
+            <ImplementedShapes/>
+            <SharedConfigurationTables/>
+            <InstanceDesignTimePermissions>
+                <Create/>
+                <Read/>
+                <Update/>
+                <Delete/>
+                <Metadata/>
+            </InstanceDesignTimePermissions>
+            <InstanceRunTimePermissions/>
+            <InstanceVisibilityPermissions>
+                <Visibility/>
+            </InstanceVisibilityPermissions>
+            <ConfigurationChanges>
+                <ConfigurationChange changeAction="CREATE" changeReason="header : name : updated, baseThingTemplate : updated&#10;documentation : updated&#10;" timestamp="2017-12-12T08:34:20.476+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="header : tags : updated&#10;" timestamp="2017-12-12T08:35:15.912+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2017-12-12T08:35:20.070+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="properties : Temperature : Added&#10;" timestamp="2018-01-08T18:58:52.844+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="properties : Temperature : Updated&#10;" timestamp="2018-01-08T19:04:00.391+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="properties : IsLightOn : Added, Updated, IsHeatingOn : Added, Updated, Humidity : Added, Updated&#10;" timestamp="2018-01-08T19:13:15.405+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="services :  : Code Updated, tatata : Service Added&#10;" timestamp="2018-01-08T19:38:06.262+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="" timestamp="2018-01-08T19:38:26.440+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="properties : Streammmm : Added&#10;" timestamp="2018-01-08T19:51:06.977+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="header : valueStream : updated&#10;properties : Streammmm : removed, Temperature : Updated, IsLightOn : Updated, IsHeatingOn : Updated, Humidity : Updated&#10;" timestamp="2018-01-09T08:41:08.875+01:00" user="Administrator"/>
+                <ConfigurationChange changeAction="MODIFY" changeReason="properties : Temperature : Updated, Humidity : Updated&#10;" timestamp="2018-01-22T19:52:39.461+01:00" user="Administrator"/>
+            </ConfigurationChanges>
+        </ThingTemplate>
+    </ThingTemplates>
+</Entities>
